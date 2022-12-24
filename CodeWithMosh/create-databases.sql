@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS `sql_invoicing`;
 CREATE DATABASE `sql_invoicing`; 
 USE `sql_invoicing`;
+SHOW TABLES;
 
 SET NAMES utf8 ;
 SET character_set_client = utf8mb4 ;
