@@ -1,1 +1,5 @@
 # MySQL
+
+**All my MySQL work is added here!**
+
+*This includes classwork, online learning, self learning and more...*
