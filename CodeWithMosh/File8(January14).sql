@@ -198,3 +198,4 @@ SELECT CONCAT(first_name,' ',last_name) AS customers,
     FROM customers
 ORDER BY points DESC ;
 
+
