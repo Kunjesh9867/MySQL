@@ -55,3 +55,33 @@ CALL get_invoices_with_balance();
 USE sql_invoicing;
 DROP PROCEDURE IF EXISTS get_clients;
 
+### Parameters
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_state(state CHAR(2)) -- varchar
+-- If there are multiple parameters, th,en you have to separate it by ,
+BEGIN
+    SELECT * FROM clients c
+    WHERE c.state = state;
+END$$
+
+DELIMITER ;
+
+CALL get_clients_by_state('CA');
+-- If you don't provide a parameter, it will raise an error
+-- Parameter are compulsory
+
+#Exercise
+-- Write a stored procedure to return invoices for a given client
+-- get_invoices_by_client
+
+DELIMITER $$
+CREATE PROCEDURE get_invoices_by_client(client_id INT)
+BEGIN
+    SELECT * FROM invoices i
+    WHERE i.client_id = client_id;
+END$$
+
+DELIMITER ;
+
+CALL get_invoices_by_client(1);
+
