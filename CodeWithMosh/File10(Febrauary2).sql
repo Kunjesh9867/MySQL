@@ -49,3 +49,9 @@ CALL get_invoices_with_balance();
 -- Easier Way:
 -- Go to Stored Procedure => right click => Create Store Procedure => in the new window, you can create a procedure without delimiter
 -- SQL add `` to prevent name clash with the SQL keywords
+
+
+### Drop Procedure
+USE sql_invoicing;
+DROP PROCEDURE IF EXISTS get_clients;
+
