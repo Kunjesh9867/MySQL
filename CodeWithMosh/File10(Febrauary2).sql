@@ -85,3 +85,93 @@ DELIMITER ;
 
 CALL get_invoices_by_client(1);
 
+# Paramerer with default values
+USE sql_invoicing;
+
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_state2(state char(2))
+BEGIN
+    IF state IS NULL THEN
+        SET state = 'CA';
+    END IF;
+
+    SELECT * FROM clients c
+    WHERE state = c.state;
+END $$
+
+DELIMITER ;
+
+CALL get_clients_by_state2(NULL);
+-- When NULL is given as a parameter, it will show output with state=CA
+
+
+-- We can also use IF/ELSE to separate multiple statements
+DELIMITER //
+CREATE PROCEDURE get_clients_by_state2(state char(2))
+BEGIN
+    IF state IS NULL THEN
+        SELECT * FROM clients;
+    ELSE
+        SELECT * FROM clients c
+        WHERE c.state = state;
+    END IF;
+END //
+
+DELIMITER ;
+
+DROP PROCEDURE get_clients_by_state2;
+CALL get_clients_by_state2(NULL);
+CALL get_clients_by_state2('CA');
+
+-- Beautiful, however this approach is verbose
+-- We can combine IF ELSE block in the single query
+
+DELIMITER //
+CREATE PROCEDURE get_clients_by_state2(state char(2))
+BEGIN
+    SELECT * FROM clients c
+        WHERE c.state = IFNULL(state,c.state);    -- c.state = c.state ==> 1=1
+END //
+
+DELIMITER ;
+
+#Exercise
+-- Write a stored procedure called get_payment
+-- with two parameters
+
+-- client_id => int
+-- payment_method_id => tinyint
+
+
+DELIMITER //
+CREATE PROCEDURE get_payments(client_id INT, payment_method_id TINYINT)
+BEGIN
+	SELECT * FROM payments p
+    WHERE p.client_id = IFNULL(client_id, p.client_id) AND
+		p.payment_method = IFNULL(payment_method_id, p.payment_method);
+END //
+
+DELIMITER ;
+
+CALL get_payments(NULL,NULL);
+
+# Parameter Validator
+USE sql_invoicing;
+
+DELIMITER //
+CREATE PROCEDURE make_payment(invoice_id INT, payment_amount DECIMAL(9,2), payment_date DATE)
+BEGIN
+    UPDATE invoices i
+    SET
+        i.payment_total = payment_amount,
+        i.payment_date = payment_date
+    WHERE i.invoice_id = invoice_id;
+
+END //
+
+DELIMITER ;
+
+DROP PROCEDURE make_payment;
+
+CALL make_payment(2,100,'2019-01-01');
+
