@@ -166,12 +166,148 @@ BEGIN
         i.payment_total = payment_amount,
         i.payment_date = payment_date
     WHERE i.invoice_id = invoice_id;
-
 END //
-
 DELIMITER ;
 
 DROP PROCEDURE make_payment;
 
 CALL make_payment(2,100,'2019-01-01');
+
+-- What if we pass a negative value to the payment_amount column,
+-- Will it be added
+-- YES! but it shouldn't
+CALL make_payment(2,-100,'2019-01-01');
+
+-- This is not GOOD
+-- We shouldn't store invalid data in the column
+
+DELIMITER //
+CREATE PROCEDURE make_payment(invoice_id INT, payment_amount DECIMAL(9,2), payment_date DATE)
+-- SIGNAL means throwing an exception just like in programming language
+
+    BEGIN
+    IF payment_amount <= 0 THEN
+        SIGNAL SQLSTATE '22003' SET MESSAGE_TEXT = 'Invalid payment amount';
+    END IF;
+
+    UPDATE invoices i
+    SET
+        i.payment_total = payment_amount,
+        i.payment_date = payment_date
+    WHERE i.invoice_id = invoice_id;
+END //
+DELIMITER ;
+
+-- It is good not to write all the validation in the procedure
+-- Because it will hard to maintain in the future
+-- Keep your validation logic to the bare minimum otherwise stored procedure will be bloated and necessary
+
+-- Let's say you entered NULL in the column, but MySQL will automatically reject it because the datatype is INT
+
+
+### OUTPUT PARAMETERS
+-- In the output we can define the output variable in the parameter section
+-- NOTE = not input but output
+DELIMITER $$
+CREATE PROCEDURE get_unpaid_invoices_for_clients(
+        client_id INT,
+        OUT invoices_count  INT,
+        OUT invoices_total DECIMAL(9,2))
+
+    BEGIN
+    SELECT COUNT(*), SUM(invoice_total)
+    INTO invoices_count, invoices_total
+        FROM invoices i
+        WHERE i.client_id = client_id
+        AND payment_total = 0;
+END $$
+DELIMITER ;
+
+
+### Variables
+-- User or session variables
+-- This variable stays till session ends
+SET @invoices_count = 0;
+
+-- In MySQL we also have another kind of variable called
+-- LOCAL Variable
+-- This variable don't stay in the memory for the entire user session
+-- We have to declare a variable right after BEGIN
+USE sql_invoicing;
+
+DELIMITER $$
+CREATE PROCEDURE get_risk_factor()
+BEGIN
+    DECLARE risk_factor DECIMAL(9,2) DEFAULT 0; -- If DEFAULT is not given, then NULL
+    DECLARE invoices_total DECIMAL(9,2);
+    DECLARE invoices_count INT;
+
+    SELECT COUNT(*), SUM(invoices_total)
+    INTO invoices_count, invoices_total
+    FROM invoices;
+
+    SET risk_factor = invoices_total/invoices_count * 5;
+
+    SELECT risk_factor;
+    -- risk_factor = invoices_total / invoices_count * 5
+END $$
+DELIMITER ;
+
+DROP PROCEDURE get_risk_factor;
+CALL get_risk_factor();
+
+
+### Functions
+-- So far, we have seen many of the build in function in MySQL
+-- Like MIN,MAX,SUBSTRING,NOW
+-- You can create your own function now
+-- Function can only returns a single value/atom value
+-- Unlike Stored Procedure which returns multiple values
+
+-- Syntax
+
+DELIMITER $$
+CREATE FUNCTION get_risk_factor_for_clients(client_id INT)
+
+RETURNS INTEGER
+
+-- DETERMINISTIC = When the data is static like tax in the order
+READS SQL DATA
+-- MODIFIES SQL DATA
+
+BEGIN
+    DECLARE risk_factor DECIMAL(9,2) DEFAULT 0; -- If DEFAULT is not given, then NULL
+    DECLARE invoices_total DECIMAL(9,2);
+    DECLARE invoices_count INT;
+
+    SELECT COUNT(*), SUM(invoices_total)
+    INTO invoices_count, invoices_total
+    FROM invoices i
+    WHERE i.client_id = client_id ;
+
+    SET risk_factor = invoices_total/invoices_count * 5;
+
+    -- risk_factor = invoices_total / invoices_count * 5
+#     RETURN risk_factor;
+    RETURN IFNULL(risk_factor,0);
+END $$
+DELIMITER ;
+
+
+SELECT client_id, name, get_risk_factor_for_clients(client_id) AS risk_factor
+    FROM clients;
+
+-- To drop a function
+DROP FUNCTION IF EXISTS get_risk_factor_for_clients;
+
+
+### Other Conventions
+-- There are various convention used in the database and programming language
+-- Some of them are:
+-- procGetRiskFactor
+-- getRiskFactor
+-- get_risk_factor
+
+-- DELIMITER $$
+-- DELIMITER //
 
