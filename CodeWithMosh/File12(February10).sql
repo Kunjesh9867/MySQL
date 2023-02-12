@@ -31,6 +31,75 @@ COMMIT; -- ROLL BACK
 -- When we execute any query in the MySQL, it will automatically commit because by default, autocommit is ON
 SHOW VARIABLES LIKE 'autocommit%'; -- SEE HERE
 
+-- (3) CONCURRENCY AND LOCKING
+-- Let's say in the real world there are 2 transaction performed at a same time
+-- Then the second transaction has to wait until the first one is over
+-- This is called LOCKING
+/*
+Open Workbench
+Start a Connection
+Write the following Query
+Open another Connection
+Write the same query
+start the transaction in the first connection (line by line)
+don't run COMMIT;
+open second transaction
+Run till Commit
+The second transaction has to wait because the first one is not over yet...
+
+You can see loading symbol near your file name
+It means the first transaction is not over and you have to wait
+
+Commit First then Second
+*/
+USE sql_store;
+START TRANSACTION;
+	UPDATE customers
+	SET points = points + 10
+	WHERE customer_id = 1 ;
+COMMIT;
+
+-- (4) CONCURRENCY PROBLEMS
+/*
+There are various concurrency problem arises
+(1) Lost Update = These happens when two transactions try to update the same data and you don't use lock. In these the transaction performs later will overwrite the previous transaction = WE USE LOCKS
+(2) Dirty Reads = In these scenario, SS
+(3) Non-repeatable Reads =
+*/
+
+-- (5) TRANSACTION ISOLATION LEVEL
+-- Screenshot
+
+SHOW VARIABLES LIKE 'transaction_isolation'; -- REPEATABLE READS
+
+-- To change the isolation level
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED ;
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED ;
+
+-- To change the isolation level for a particular session
+SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+-- To change the isolation level for ALL session
+SET GLOBAL TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+-- Generally, the developer change the isolation for a particular session
+-- Do the works, then make it default
+
+-- (6) READ UNCOMMITTED isolation level
+-- Files are added READ_UNCOMMITTED_1 READ_UNCOMMITTED_2
+
+-- (7) READ COMMITTED isolation level
+-- Files are added READ_COMMITTED_1 READ_COMMITTED_2
+
+-- (8) REPEATABLE READ isolation level
+-- Files are added REPEATABLE_READ_1 REPEATABLE_READ_2
+
+-- (8) SERIALIZABLE isolation level
+-- Files are added SERIALIZABLE_1 SERIALIZABLE_2
+
+
+
 
 
 
