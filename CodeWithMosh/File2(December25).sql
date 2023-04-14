@@ -101,6 +101,7 @@ WHERE last_name REGEXP 'EY$|ON$';
 -- lastnames starts with MY or contains SE
 SELECT * FROM customers
 WHERE last_name REGEXP '^MY|SE';
+
 -- lastnames contain B followed by R or U
 SELECT * FROM customers  -- 1st
 WHERE last_name REGEXP 'B[RU]';

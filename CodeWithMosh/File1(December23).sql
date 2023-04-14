@@ -9,7 +9,7 @@ SELECT * FROM customers
 WHERE customer_id=1;
 
 -- Selection without table
-SELECT 1 First,2 Second,3 Third;
+SELECT 1 First,2 Second,3;
 
 
 ### SELECT Clause ###
@@ -33,6 +33,8 @@ SELECT name,
        unit_price,
        unit_price*1.1 AS "new price"
 FROM products;
+
+SELECT name, unit_price, (unit_price*1.1) 'new price' FROM products;
 
 
 ### WHERE Clause ###
@@ -81,9 +83,9 @@ SELECT * FROM customers
 WHERE state = 'VA' OR state = 'GA' OR state = 'FL';  -- This is quite MESSY :(
 
 SELECT * FROM customers
-WHERE state IN ('VA', 'GA','FL');
+WHERE state NOT IN ('VA', 'GA','FL')
+ORDER BY customer_id;
 --         NOT IN
-
 
 #Exercise
 -- Return products with

@@ -109,7 +109,7 @@ Run the create-db-blog.sql
 */
 
 USE sql_blog;
-SELECT * FROM sql_blog.posts
+SELECT * FROM sql_blog.posts;
 
 -- Let's say we have to search for `react redux` in the column
 SELECT * FROM posts
