@@ -1,5 +1,5 @@
 use sql_store;
-select *from customers;
+# select *from customers;
 insert into customers (first_name, last_name, birth_date, address, city, state, points) values ('Ashlin', 'Bickerdyke', '1970-12-09', '79 Holmberg Parkway', 'Saint Louis', 'MO', 1278);
 insert into customers (first_name, last_name, birth_date, address, city, state, points) values ('Mordecai', 'Barltrop', '1970-08-06', '59322 Northridge Street', 'Long Beach', 'CA', 838);
 insert into customers (first_name, last_name, birth_date, address, city, state, points) values ('Karoline', 'Gookey', '1975-09-15', '180 Walton Pass', 'New York City', 'NY', 24);
