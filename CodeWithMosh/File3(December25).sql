@@ -5,7 +5,7 @@ SELECT orders.order_id, customers.first_name, customers.last_name
 FROM customers
 JOIN orders ON customers.customer_id = orders.customer_id; -- INNER JOIN or JOIN, both are same
 -- If there a column which is available in both the table then,
--- we  have to explicitly tell (customers.customer_id) to the SQL
+-- we have to explicitly tell (customers.customer_id) to the SQL
 
 SELECT o.order_id, c.first_name, c.last_name
 FROM customers c

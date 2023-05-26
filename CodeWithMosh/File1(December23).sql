@@ -10,6 +10,7 @@ WHERE customer_id=1;
 
 -- Selection without table
 SELECT 1 First,2 Second,3;
+SELECT 1,2,3;
 
 
 ### SELECT Clause ###
@@ -29,9 +30,10 @@ SELECT DISTINCT state FROM customers;
 -- name
 -- unit price
 -- new price (unit price * 1.1)
+
 SELECT name,
        unit_price,
-       unit_price*1.1 AS "new price"
+       unit_price*1.1 AS 'new price'
 FROM products;
 
 SELECT name, unit_price, (unit_price*1.1) 'new price' FROM products;
@@ -92,16 +94,3 @@ ORDER BY customer_id;
 -- quantity in stock equal to 49, 38, 72
 SELECT * FROM products
 WHERE quantity_in_stock IN (49, 38, 72);
-
-
-
-
-
-
-
-
-
-
-
-
-

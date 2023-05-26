@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a02b438f-f75b-4572-8381-647f2c999331" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/CodeWithMosh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CodeWithMosh.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codestream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0abaf06b-4e47-4619-b2ab-44b29e02df2a.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0abaf06b-4e47-4619-b2ab-44b29e02df2a/storage_v2/_src_/database/AP.LwgAAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0abaf06b-4e47-4619-b2ab-44b29e02df2a/storage_v2/_src_/database/AP.LwgAAA/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0abaf06b-4e47-4619-b2ab-44b29e02df2a/storage_v2/_src_/database/AP.LwgAAA/schema/sys.zb4BAA.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/b087f9fd-9727-4229-baf4-b590e75f696b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b087f9fd-9727-4229-baf4-b590e75f696b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/File1(December23).sql" beforeDir="false" afterPath="$PROJECT_DIR$/File1(December23).sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/File2(December25).sql" beforeDir="false" afterPath="$PROJECT_DIR$/File2(December25).sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/File3(December25).sql" beforeDir="false" afterPath="$PROJECT_DIR$/File3(December25).sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/File4(December26).sql" beforeDir="false" afterPath="$PROJECT_DIR$/File4(December26).sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create-databases.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create-databases.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create-db-store.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create-db-store.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,8 +43,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/kunje/Desktop/GitHub/MySQL/CodeWithMosh",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.better-comments"
+    "last_opened_file_path": "C:/Users/kunje",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [

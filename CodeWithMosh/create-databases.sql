@@ -220,8 +220,9 @@ CREATE TABLE `sql_store`.`order_item_notes` (
   `note` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`note_id`));
 
-INSERT INTO `order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('1', '1', '2', 'first note');
-INSERT INTO `order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('2', '1', '2', 'second note');
+DROP TABLE IF EXISTS `sql_store`.order_items;
+INSERT INTO `sql_store`.`order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('1', '1', '2', 'first note');
+INSERT INTO `sql_store`.`order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('2', '1', '2', 'second note');
 
 
 DROP DATABASE IF EXISTS `sql_hr`;

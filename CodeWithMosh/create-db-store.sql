@@ -95,7 +95,7 @@ INSERT INTO `orders` VALUES (8,5,'2018-06-08',1,'Mauris enim leo, rhoncus sed, v
 INSERT INTO `orders` VALUES (9,10,'2017-07-05',2,'Nulla mollis molestie lorem. Quisque ut erat.','2017-07-06',1);
 INSERT INTO `orders` VALUES (10,6,'2018-04-22',2,NULL,'2018-04-23',2);
 
-
+drop TABLE IF EXISTS `order_items`;
 CREATE TABLE `order_items` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -125,6 +125,8 @@ INSERT INTO `order_items` VALUES (9,6,5,7.28);
 INSERT INTO `order_items` VALUES (10,1,10,6.01);
 INSERT INTO `order_items` VALUES (10,9,9,4.28);
 
+drop TABLE IF EXISTS `sql_store`.`order_item_NOTES`;
+
 CREATE TABLE `sql_store`.`order_item_notes` (
   `note_id` INT NOT NULL,
   `order_Id` INT NOT NULL,
@@ -132,5 +134,5 @@ CREATE TABLE `sql_store`.`order_item_notes` (
   `note` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`note_id`));
 
-INSERT INTO `order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('1', '1', '2', 'first note');
-INSERT INTO `order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('2', '1', '2', 'second note');
+INSERT INTO `sql_store`.`order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('1', '1', '2', 'first note');
+INSERT INTO `sql_store`.`order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('2', '1', '2', 'second note');

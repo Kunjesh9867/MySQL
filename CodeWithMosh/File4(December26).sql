@@ -2,7 +2,7 @@
 USE sql_store;
 SELECT * FROM orders o   -- Explicit Join Syntax
 JOIN customers c
-    ON c.customer_id = o.customer_id;
+    ON c.customer_id = o.customer_id; -- If you forget 'ON' => Cross Join
 
 -- The above query can be written as:
 SELECT * FROM orders o, customers c  -- Implicit join syntax
@@ -46,6 +46,18 @@ SELECT
     FROM products p
 LEFT JOIN order_items oi
     ON p.product_id = oi.product_id;
+/*
+PRACTICE:
+-- product order item
+SELECT * FROM products;
+SELECT * FROM order_items;
+
+SELECT p.product_id, p.name, o.quantity
+    FROM products p
+LEFT OUTER JOIN order_items o
+ON p.product_id = o.product_id
+order by p.product_id;
+*/
 
 
 ### OUTER Joins Between Multiple Tables ###
@@ -87,6 +99,7 @@ ORDER BY os.name;
 
 ### SELF OUTER JOINS ###
 USE sql_hr;
+SELECT * FROM employees;
 SELECT
     e.employee_id,
     e.first_name,

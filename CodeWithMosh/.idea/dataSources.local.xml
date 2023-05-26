@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="DB-231.8770.3">
+  <component name="dataSourceStorageLocal" created-in="DB-231.9011.35">
     <data-source name="@localhost" uuid="b087f9fd-9727-4229-baf4-b590e75f696b">
       <database-info product="MySQL" version="8.0.31" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.25 (Revision: 08be9e9b4cba6aa115f9b27b215887af40b159e0)" dbms="MYSQL" exact-version="8.0.31" exact-driver-version="8.0">
         <extra-name-characters>#@</extra-name-characters>
@@ -11,29 +11,7 @@
       <user-name>root</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema">
-            <name qname="store" />
-            <name qname="9kunj4" />
-            <name qname="@" />
-            <name qname="sql_blog" />
-            <name qname="sql_store" />
-          </node>
-        </introspection-scope>
-      </schema-mapping>
-    </data-source>
-    <data-source name="AP@localhost" uuid="0abaf06b-4e47-4619-b2ab-44b29e02df2a">
-      <database-info product="Microsoft SQL Server" version="16.00.1000" jdbc-version="4.2" driver-name="Microsoft JDBC Driver 12.2 for SQL Server" driver-version="12.2.0.0" dbms="MSSQL" exact-version="16.0.1000" exact-driver-version="12.2">
-        <extra-name-characters>$#@</extra-name-characters>
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
-      <secret-storage>master_key</secret-storage>
-      <auth-provider>ms-sso</auth-provider>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="database" qname="@">
-            <node kind="schema" qname="@" />
-          </node>
+          <node kind="schema" qname="sql_blog" negative="1" />
         </introspection-scope>
       </schema-mapping>
     </data-source>

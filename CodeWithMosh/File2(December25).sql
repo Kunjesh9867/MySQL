@@ -129,18 +129,20 @@ ORDER BY state, first_name DESC;
 -- One of the MySQL feature which separate it from other DBMS
 -- is that you can order the data by any column(whether or not it is included in your SELECT statement)
 
+SELECT * FROM customers;
 SELECT first_name, last_name, 10 AS points FROM customers
 ORDER BY points, first_name DESC;
 
 SELECT first_name, last_name, 10 AS points FROM customers
 ORDER BY 1,2;
 -- Here 1 is the first column in SELECT statement and 2 is the second column.
--- It should be avoided in the real time becuase
+-- It should be avoided in the real time because
 -- in future if someone add column at the 1st position then the SQL will sort it by that new column
 
 #Exercise
 -- Question = Screenshot (Desired Output)
 -- Answer is below:
+SELECT * FROM order_items;
 SELECT order_id,product_id,quantity,unit_price FROM order_items
 WHERE order_id = 2
 ORDER BY (quantity*unit_price) DESC;
