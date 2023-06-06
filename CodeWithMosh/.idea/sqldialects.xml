@@ -3,7 +3,9 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/../../Semester-3/SQL/Database/create_ap.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/../../Semester-3/SQL/Week2/TASKS.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/../../Semester-3/SQL/Week3/Assignment.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/../../Semester-3/SQL/Week3/Task.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/../../Semester-3/SQL/Week4/Classwork.sql" dialect="TSQL" />
     <file url="file://$USER_HOME$/Downloads/create_ap (1).sql" dialect="TSQL" />
   </component>
 </project>
