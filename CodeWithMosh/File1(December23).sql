@@ -1,4 +1,5 @@
 -- To Select a database
+-- commit on 2 June 2023
 USE sql_store;
 
 # To select all the entries from a Table
