@@ -4,7 +4,7 @@ USE sql_store;
 INSERT INTO customers
 VALUES (DEFAULT,'John','Smith','1990-01-01',NULL,'address','city','CA',DEFAULT);
 --                                          DEFAULT                     0
-
+-- Default is for auto_increment
 
 ### Inserting Multiple Rows ###
 INSERT INTO shippers
@@ -16,7 +16,7 @@ VALUES (DEFAULT,'Shipper1'),
 -- Insert three rows in the products table
 SELECT * FROM products;
 INSERT INTO products
-VALUES (DEFAULT,'Mushroom',100,10.99),
+VALUES (DEFAULT,'Mushroom',100,10.99),  -- Default because it is auto_increment
        (DEFAULT,'Apple',50,5.5),
        (DEFAULT,'Guava',500,3.99);
 
@@ -43,7 +43,7 @@ TRUNCATE TABLE orders_archieved; -- To delete all the rows from the table
 
 
 INSERT INTO orders_archieved
-SELECT * FROM orders  -- Sub    query
+SELECT * FROM orders  -- Sub query
 WHERE order_date < '2019-01-01';
 
 #Exercise
@@ -80,6 +80,9 @@ WHERE invoice_id=3;
 ### Updating Multiple Rows ###
 -- MySQL works on safe update mode, so it will give you an warning
 -- But if you are using other software, it won't
+-- In order to turn off safe update mode, Go to
+-- MySQL Workbench => Edit => Preference => SQL Editor => Tick off the safe update mode
+-- Exit workbench and reopen it again
 
 UPDATE invoices
 SET payment_total = invoice_total*0.5,

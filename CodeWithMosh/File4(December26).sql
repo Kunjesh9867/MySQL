@@ -168,7 +168,7 @@ JOIN payment_methods pm
 
 USE sql_store;
 
-SELECT * FROM orders o
+SELECT * FROM   orders o
 NATURAL JOIN customers c;
 
 SELECT
@@ -212,6 +212,7 @@ SELECT * FROM shippers
 
 ### UNION ###
 
+
 SELECT
     order_id,
     order_date,
@@ -253,7 +254,7 @@ SELECT
     points,
     'Silver'
     FROM customers
-WHERE points >= 2000 AND points < 3000
+WHERE points >= 2000 AND points <= 3000 -- Between 2000 and 3000
 
 UNION
 
@@ -263,7 +264,7 @@ SELECT
     points,
     'Gold' AS type
     FROM customers
-WHERE points >= 3000
+WHERE points > 3000
 
 ORDER BY first_name;
 
