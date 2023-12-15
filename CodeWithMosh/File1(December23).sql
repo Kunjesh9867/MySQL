@@ -1,6 +1,6 @@
 -- To Select a database
 -- commit on 2 June 2023
-USbbE sql_store;
+USE sql_store;
 
 # To select all the entries from a Table
 SELECT * FROM customers;
@@ -86,7 +86,7 @@ SELECT * FROM customers
 WHERE state = 'VA' OR state = 'GA' OR state = 'FL';  -- This is quite MESSY :(
 
 SELECT * FROM customers
-WHERE state NOT IN ('VA', 'GA','FL')
+WHERE state IN ('VA', 'GA','FL')
 ORDER BY customer_id;
 --         NOT IN
 

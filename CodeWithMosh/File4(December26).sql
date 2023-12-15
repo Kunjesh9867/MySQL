@@ -271,3 +271,44 @@ ORDER BY first_name;
 
 -- NOTE: THe above query can be written by using BETWEEN clause
 
+
+CREATE DATABASE join_practice;
+USE join_practice;
+-- MySQL dump 10.13  Distrib 5.6.33, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: w3resour_hr
+-- ------------------------------------------------------
+-- Server version	5.6.33-0ubuntu0.14.04.1
+
+SELECT location_id, street_address, city, state_province, c.country_name from locations
+NATURAL JOIN countries c;
+
+select FIRST_NAME, LAST_NAME, DEPARTMENT_ID, DEPARTMENT_NAME from employees join departments using(department_id);
+
+
+select FIRST_NAME, LAST_NAME, JOB_ID, employees.DEPARTMENT_ID, DEPARTMENT_NAME
+    from employees
+    join departments on employees.DEPARTMENT_ID = departments.DEPARTMENT_ID
+    join locations ON locations.LOCATION_ID = departments.LOCATION_ID
+    where LOWER(CITY) = 'LONDON'
+
+
+SELECT E.FIRST_NAME, e.LAST_NAME, e.HIRE_DATE FROM employees e
+JOIN employees m
+ON e.EMPLOYEE_ID = m.MANAGER_ID
+where HIRE_DATE > '1987-09-20';
+
+
+select * from job_history;
+select * from jobs;
+
+select EMPLOYEE_ID, JOB_TITLE, END_DATE - START_DATE days
+from job_history
+         natural join jobs
+where DEPARTMENT_ID = 90;
+
+select d.DEPARTMENT_ID, DEPARTMENT_NAME, d.MANAGER_ID, FIRST_NAME from departments d
+join employees e on d.MANAGER_ID = e.EMPLOYEE_ID
+
+select from departments join employees
+
