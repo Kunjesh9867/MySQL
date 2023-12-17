@@ -44,4 +44,68 @@ SELECT CONCAT_WS('-', author_fname,author_lname) FROM books;
 
 -- (3) SUBSTRING or SUBSTR
 SELECT SUBSTRING('Hello World', 1,5); -- Hello
---                string, start, total_number_of_char(optional)
+--                  string, start, total_number_of_char(optional)
+
+-- (4) CONCAT
+SELECT CONCAT(SUBSTR('Kunjesh Ramani',1), '...');  -- Kunjesh Ramani...
+
+-- (5) REPLACE = case-sensitive = It is not use to alter/update
+SELECT REPLACE('Cheese Bread Coffee Milk', ' ', ' and ');
+
+-- (6) REVERSE
+SELECT REVERSE('Kunjesh'); -- hsejnuK
+SELECT REVERSE('NULL'); -- NULL
+
+-- (7) CHAR_LENGTH
+SELECT CHAR_LENGTH('Kunjesh'); -- 7 = number of character
+
+-- (8) LENGTH
+SELECT LENGTH('Kunjesh'); -- 7 = number of bytes
+
+-- (9) UPPER or UCASE
+SELECT UPPER('kunjesh');
+SELECT UCASE('kunjesh');
+
+-- (10) LOWER or LCASE
+SELECT LOWER('KUNJESH');
+SELECT LCASE('KUNJESH');
+
+-- (11) INSERT
+SELECT INSERT('Hello Kunjesh',7 ,0,'World '); -- Hello World Kunjesh
+SELECT INSERT('Hello Kunjesh', 7, 5, 'World '); -- Hello World sh
+
+-- (12) LEFT
+SELECT LEFT('Kunjesh', 1); -- K
+
+-- (13) RIGHT
+SELECT RIGHT('Kunjesh', 1); -- h
+
+-- (14) REPEAT
+SELECT REPEAT('Kunjesh',2); -- KunjeshKunjesh
+
+-- (15) TRIM = leading & trailing = There is also a function to specific how many leading/trailing should be removed
+SELECT TRIM('    kunjesh     '); -- kunjesh
+
+
+-- CHALLENGE
+SELECT UCASE(REVERSE('Why does my cat look at me with such hatred?'));
+
+-- I-like-cats
+SELECT DATABASE();
+SHOW TABLES;
+SELECT * FROM Books;
+
+SELECT REPLACE(title, ' ', '->') 'title'  FROM books;
+
+SELECT author_lname AS 'forwards', REVERSE(author_lname) AS 'backwards' FROM books;
+
+SELECT UPPER(CONCAT(author_fname, ' ', author_lname)) AS 'Full name in caps' FROM books;
+
+SELECT CONCAT(title, ' was released in ', released_year) AS 'blurb' FROM books;
+
+SELECT title, CHAR_LENGTH(title) AS 'character count' FROM books;
+
+SELECT CONCAT(SUBSTR(title, 1, 10), '...') AS 'short title',
+    CONCAT(author_lname, ',',author_fname),
+    concat(stock_quantity, ' in stock')
+FROM books
