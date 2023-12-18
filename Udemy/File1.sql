@@ -108,3 +108,6 @@ WHERE shirt_size = 'M';
 UPDATE shirts
 SET shirt_size = 'L'
 WHERE article = 'polo shirt'
+
+-- TO SEE ALL THE WARNINGS
+SHOW WARNINGS;
