@@ -61,6 +61,10 @@ SELECT SUM(author_fname) FROM books; -- 0, if not number => 0
 -- (8) AVG
 SELECT AVG(pages) FROM books; -- RESULT is numeric with decimal
 
+-- (9) ROUND
+
+-- (10) REPLACE
+
 #### EXERCISE ####
 SELECT * FROM books;
 
