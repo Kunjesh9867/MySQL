@@ -1,4 +1,4 @@
-# MySQL
+# MySQL = Michael Widenius
 
 **All my MySQL work is added here!**
 
