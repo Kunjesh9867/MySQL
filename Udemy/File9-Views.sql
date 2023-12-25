@@ -37,3 +37,31 @@ DROP VIEW ordered_series;
 SELECT title, AVG(rating), COUNT(rating) AS review_count
 FROM full_reviews
 GROUP BY title HAVING COUNT(rating) > 1;
+
+
+# GROUP BY =  WITH ROLLUP
+SELECT title, AVG(rating) FROM full_reviews
+GROUP BY title WITH ROLLUP;
+
+SELECT title, COUNT(rating) FROM full_reviews
+GROUP BY title WITH ROLLUP;
+
+SELECT first_name, released_year, genre, AVG(rating) FROM full_reviews
+GROUP BY released_year , genre , first_name WITH ROLLUP;
+
+
+# SQL MODES
+# SQL MODES is basically the settings that we can turn it on and off to change the behaviour of MySQL
+
+## Viewing modes
+-- (1) SELECT @@GLOBAL.sql_mode;
+-- (2) SELECT @@SESSION.sql_mode;
+
+## Setting modes
+-- (1) SET GLOBAL sql_mode = 'modes(list of modes)';
+-- (2) SET SESSION sql_mode = 'modes(list of modes)';
+
+SET SESSION sql_mode = 'mode';
+
+
+-- Sir talk about the STRICT_TRANS_TABLES, in which, you can change the settings, for more 'check docs'
