@@ -1,4 +1,4 @@
-### WINDOW FUNCTIOS ###
+### WINDOW FUNCTIONS ###
 -- Window functions perform aggregate operations on groups of rows, but they produce a result FOR EACH ROW.
 -- Window functins are tricky and hard to understand.
 
