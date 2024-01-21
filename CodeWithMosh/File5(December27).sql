@@ -6,6 +6,9 @@ VALUES (DEFAULT,'John','Smith','1990-01-01',NULL,'address','city','CA',DEFAULT);
 --                                          DEFAULT                     0
 -- Default is for auto_increment
 
+
+select * from customers;
+
 ### Inserting Multiple Rows ###
 INSERT INTO shippers
 VALUES (DEFAULT,'Shipper1'),
@@ -23,7 +26,7 @@ VALUES (DEFAULT,'Mushroom',100,10.99),  -- Default because it is auto_increment
 ### Inserting Hierarchical Rows ###
 -- order = parent
 -- order_items = child
-INSERT INTO orders (customer_id, order_date, status)
+INSERT INTO orders (customer_id, order_date, status) -- rest of them are OPTIONAL
 VALUES (1,'2019-01-02',1);
 
 SELECT LAST_INSERT_ID();
@@ -51,14 +54,16 @@ WHERE order_date < '2019-01-01';
 -- Answer:
 USE sql_invoicing;
 
-SELECT
-    invoice_id,
-    number,
-    client_id,
-    clients.name
-    FROM invoices
-JOIN clients
-    USING (client_id);
+CREATE TABLE invoice_archieved as
+select i.invoice_id,
+       i.number,
+       c.name,
+       invoice_total,
+       payment_date
+       from invoices i
+JOIN sql_invoicing.clients c on c.client_id = i.client_id
+JOIN sql_invoicing.payments p on p.invoice_id = i.invoice_id
+WHERE i.payment_date is not null;
 
 ### Updating a Single Row ###
 USE sql_invoicing;
@@ -147,9 +152,7 @@ WHERE invoice_id=1;
 
 
 DELETE FROM invoices
-WHERE client_id = (
-    SELECT client_id FROM clients
-             WHERE name = 'Myworks');
+WHERE client_id = ( SELECT client_id FROM clients WHERE name = 'Myworks');
 
 /*  DELETE FROM invoices
     WHERE client_id = (

@@ -57,7 +57,7 @@ WHERE i.invoice_id IS NULL;
 -- Select customer_id, first_name, last_name
 USE sql_store;
 
-
+-- 1
 SELECT * FROM customers
 WHERE customer_id IN (
     SELECT orders.customer_id FROM orders
@@ -65,6 +65,7 @@ WHERE customer_id IN (
     WHERE product_id =3
     );
 
+-- 2
 SELECT
     DISTINCT c.customer_id,
              first_name,
@@ -87,6 +88,7 @@ WHERE invoice_total >
       (SELECT MAX(invoice_total)
        FROM invoices
        WHERE client_id=3);
+
 
 SELECT * FROM invoices
 WHERE invoice_total > ALL (
@@ -113,17 +115,19 @@ WHERE invoice_total > SOME(
 -- Select employees whose salary is
 -- above the average in their office
 USE sql_hr;
+select * from employees;
 
 -- Pseudo Code
 -- for each employee,
 --      calculate the avg salary for employee.office
 --      return the employee if salary > avg
-
 SELECT * FROM employees e
 WHERE salary > (   -- SubQuery
     SELECT AVG(salary) FROM employees
     WHERE  office_id = e.office_id  -- Correlated subquery = We correlate outer query with inner
     );
+
+
 
 # Some of the times the correlated query will be slow as it need to correlate with the outer query
 -- Correlated query has a lot of applications in the real world.
@@ -133,11 +137,12 @@ WHERE salary > (   -- SubQuery
 -- client's average invoice amount
 USE sql_invoicing;
 
+
 SELECT * FROM invoices i
 WHERE invoice_total > (
     SELECT AVG(invoice_total) FROM invoices
     WHERE client_id = i.client_id
-    );
+);
 
 ### (8) EXISTS Operator
 -- Select clients that have an invoice
@@ -164,7 +169,7 @@ WHERE client_id IN (
 -- Now, we are going to the 3rd method to solve the same problem
 
 SELECT * FROM clients c
-WHERE EXISTS( -- Exists
+WHERE EXISTS( -- Exists = It will generate True/False result, if True then => it will display the record
     SELECT client_id FROM invoices
     WHERE client_id = c.client_id  -- Correlated Subquery
 );
@@ -198,6 +203,8 @@ SELECT invoice_id,
 
 #Exercise
 USE sql_invoicing;
+
+-- Solution-1
 SELECT client_id,
        name,
        (SELECT SUM(invoice_total) FROM invoices WHERE c.client_id = client_id) AS total_sales,
@@ -206,6 +213,13 @@ SELECT client_id,
     -- (SELECT total_sales - average) AS difference
     FROM clients c ;
 
+-- Solution-2
+select c.client_id, c.name, SUM(invoice_total) as total_sales,
+       (SELECt AVG(invoice_total) FROM invoices) as average,
+       SUM(invoice_total) - (SELECT average)  as difference
+from invoices
+RIGHT JOIN sql_invoicing.clients c on invoices.client_id = c.client_id
+GROUP BY c.client_id, c.name;
 
 ### (10) Subquery in the FROM clause
 -- In the above exercise, we have generate a valuable data

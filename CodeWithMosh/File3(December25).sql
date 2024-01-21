@@ -24,7 +24,7 @@ JOIN products p ON order_items.product_id = p.product_id;
 --        sql_inventory = products
 --        sql_store = products
 
--- Note: You only have to prefer the database that is not the part of the table
+-- Note: You only have to prefix the database that is not the part of the table
 USE sql_store;
 SELECT * FROM order_items
 JOIN sql_inventory.products
@@ -77,6 +77,13 @@ JOIN clients c
 JOIN payment_methods pm
     ON payments.payment_method = pm.payment_method_id;
 
+# select payment_id, c.client_id,
+# 	c.name, invoice_id, date, amount,pm.name
+#  from payments p
+# JOIN clients c on p.client_id = c.client_id
+# JOIN payment_methods pm on
+# p.payment_method = pm.payment_method_id;
+
 
 ### Compound Join Conditions
 -- Some of the times we cannot uniquely identify by using one column,
@@ -87,3 +94,4 @@ SELECT * FROM order_items oi
 JOIN order_item_notes oin
     ON oi.order_id = oin.order_Id
     AND oi.product_id = oin.product_id;
+

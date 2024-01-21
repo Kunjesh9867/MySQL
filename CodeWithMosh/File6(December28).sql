@@ -125,6 +125,7 @@ HAVING total_sales > 100;
 
 ### ROLLUP Operator ###
 -- ROLLUP means total of the value
+-- Only applies to aggregate columns
 -- Only available in MySQL
 USE sql_invoicing;
 

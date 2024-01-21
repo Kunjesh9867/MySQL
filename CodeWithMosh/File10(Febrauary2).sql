@@ -42,6 +42,9 @@ DELIMITER ;
 
 CALL get_invoices_with_balance();
 
+use sql_invoicing;
+select * from invoices;
+
 
 ### Creating Procedure Using MySQL Workbench
 -- Now you might think that creating stored procedure is very tedious in MySQL because we have to change
@@ -58,7 +61,7 @@ DROP PROCEDURE IF EXISTS get_clients;
 ### Parameters
 DELIMITER $$
 CREATE PROCEDURE get_clients_by_state(state CHAR(2)) -- varchar
--- If there are multiple parameters, th,en you have to separate it by ,
+-- If there are multiple parameters, then you have to separate it by ,
 BEGIN
     SELECT * FROM clients c
     WHERE c.state = state;
@@ -85,7 +88,7 @@ DELIMITER ;
 
 CALL get_invoices_by_client(1);
 
-# Paramerer with default values
+# Parameter with default values
 USE sql_invoicing;
 
 DELIMITER $$
@@ -104,6 +107,22 @@ DELIMITER ;
 CALL get_clients_by_state2(NULL);
 -- When NULL is given as a parameter, it will show output with state=CA
 
+#--------------------------------#
+/*
+    The syntax for the IF-THEN-ELSE statement in MySQL is:
+
+IF condition1 THEN
+   {...statements to execute when condition1 is TRUE...}
+
+[ ELSEIF condition2 THEN
+   {...statements to execute when condition1 is FALSE and condition2 is TRUE...} ]
+
+[ ELSE
+   {...statements to execute when both condition1 and condition2 are FALSE...} ]
+END IF;
+
+*/
+#--------------------------------#
 
 -- We can also use IF/ELSE to separate multiple statements
 DELIMITER //
@@ -126,6 +145,8 @@ CALL get_clients_by_state2('CA');
 -- Beautiful, however this approach is verbose
 -- We can combine IF ELSE block in the single query
 
+
+-- GOOD CONCEPT OF USING 'IFNULL'
 DELIMITER //
 CREATE PROCEDURE get_clients_by_state2(state char(2))
 BEGIN
@@ -198,6 +219,8 @@ CREATE PROCEDURE make_payment(invoice_id INT, payment_amount DECIMAL(9,2), payme
 END //
 DELIMITER ;
 
+-- If the payment_amount is less than 0 => It will throw the ERROR and rest of the stored procedure will not be executed.
+
 -- It is good not to write all the validation in the procedure
 -- Because it will hard to maintain in the future
 -- Keep your validation logic to the bare minimum otherwise stored procedure will be bloated and necessary
@@ -223,11 +246,23 @@ CREATE PROCEDURE get_unpaid_invoices_for_clients(
 END $$
 DELIMITER ;
 
+-- query = Run all the at once
+SET @invoices_count = 0;
+SET @invoices_total= 0;
+CALL get_unpaid_invoices_for_clients(5, @invoices_count, @invoices_total);
+SELECT @invoices_count, @invoices_total;
+
 
 ### Variables
 -- User or session variables
 -- This variable stays till session ends
 SET @invoices_count = 0;
+
+-- Setting the datatype is OPTIONAL
+/*
+DECLARE invoices_count INT;
+SET invoices_count = 0;
+*/
 
 -- In MySQL we also have another kind of variable called
 -- LOCAL Variable
@@ -267,9 +302,7 @@ CALL get_risk_factor();
 -- Syntax
 
 DELIMITER $$
-CREATE FUNCTION get_risk_factor_for_clients(client_id INT)
-
-RETURNS INTEGER
+CREATE FUNCTION get_risk_factor_for_clients(client_id INT) RETURNS INTEGER
 
 -- DETERMINISTIC = When the data is static like tax in the order
 READS SQL DATA

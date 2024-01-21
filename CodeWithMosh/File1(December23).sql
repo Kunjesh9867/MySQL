@@ -1,5 +1,4 @@
 -- To Select a database
--- commit on 2 June 2023
 USE sql_store;
 
 # To select all the entries from a Table
@@ -45,7 +44,7 @@ SELECT name, unit_price, (unit_price*1.1) 'new price' FROM products;
 -- Where clause is used to filter the data in the table
 SELECT * FROM customers
 WHERE points > 3000;
--- There are various comparison operator like [> || >=|| < || <= || = || != || <>]
+-- There are various comparison operator like [> || >= || < || <= || = || != || <>]
 -- When there is a STRING or DATE to compare, we use single/double quote, but by default we use ' '
 
 ### AND,OR,NOT Operators ###

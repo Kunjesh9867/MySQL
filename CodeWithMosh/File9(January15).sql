@@ -8,7 +8,7 @@ SELECT c.client_id,
 JOIN invoices i USING (client_id)
 GROUP BY client_id, name;
 
--- The above query is very useful and might be multiple times.
+-- The above query is very useful and might be used multiple times.
 -- For this purpose, we can create VIEW
 
 CREATE VIEW sales_by_client AS
@@ -109,6 +109,8 @@ WHERE invoice_id = 2;
 UPDATE invoices_with_balance
 SET payment_total = invoice_total
 WHERE invoice_id = 2;
+
+select * from invoices_with_balance;
 
 -- When we run the above query, the record where invoice_id = 2 will disappear
 -- This is the default behavior of the view

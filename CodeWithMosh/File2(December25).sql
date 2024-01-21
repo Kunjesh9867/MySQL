@@ -176,5 +176,3 @@ SELECT * FROM customers
 ORDER BY points DESC
 LIMIT 0,3;
 -- Both the above query produces the same result
-
-

@@ -85,7 +85,7 @@ CREATE TABLE shirts (
     color VARCHAR(20),
     shirt_size VARCHAR(1),
     last_worn int
-)
+);
 
 INSERT INTO shirts (article, color, shirt_size, last_worn)
 VALUES
@@ -107,7 +107,7 @@ WHERE shirt_size = 'M';
 
 UPDATE shirts
 SET shirt_size = 'L'
-WHERE article = 'polo shirt'
+WHERE article = 'polo shirt';
 
 -- TO SEE ALL THE WARNINGS
 SHOW WARNINGS;

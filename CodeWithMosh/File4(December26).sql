@@ -39,6 +39,15 @@ ORDER BY c.customer_id;
 #Exercise
 -- Question = Watch video:
 -- Answer:
+show tables ;
+select  p.product_id, p.name  from products p
+join order_items oi on p.product_id= oi.product_id;
+
+select * from order_items;
+select * from products;
+
+
+
 SELECT
     p.product_id,
     p.name,
