@@ -10,7 +10,7 @@
 -- Consistency = That means, with these transaction, our database will always remains in consistent state. We won't end up with an order without an item
 -- Isolation = These transaction are isolated from each other and protected from each other if they try to modify the same data. So they cannot interfere with each other.
 --             If multiple transaction try to update the same data, the rows that are being affected get locked, so only one transaction at a time can update those rows. Other transactions have to wait for that transaction to complete.
--- Durability = That means, once a transacion is committed the changes made by the transaction are permanent. So there is a failure or a system crash, we are not going to lose the system changes.
+-- Durability = That means, once a transaction is committed the changes made by the transaction are permanent. So there is a failure or a system crash, we are not going to lose the system changes.
 
 
 -- (2) CREATING TRANSACTIONS
@@ -99,7 +99,8 @@ SET GLOBAL TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 -- Files are added SERIALIZABLE_1 SERIALIZABLE_2
 
 
-
-
-
-
+USE sql_store;
+START TRANSACTION;
+UPDATE customers SET state = 1 WHERE customer_id = 1;
+UPDATE orders SET status = 1 WHERE order_id = 1;
+COMMIT;
