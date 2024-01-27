@@ -34,9 +34,8 @@ WHERE state='CA';
 -- To ask the SQL, how does it fetch the result, simply type EXPLAIN
 EXPLAIN SELECT customer_id FROM customers
 WHERE state='CA';
-
 -- Above, we only have to look to `type` and `key`
-CREATE INDEX idx_state
+CREATE INDEX idx_state -- idx is CONVENTION
 ON customers(state);
 
 EXPLAIN SELECT customer_id FROM customers
@@ -69,6 +68,8 @@ SHOW INDEXES IN customers; -- name of the table
 -- This is the index created by primary key
 -- MySQL generate the index of primary key automatically so that it can fetch the records easily/faster
 -- PRIMARY KEY index is also called CLUSTER INDEX.
+-- PRIMARY KEY, FOREIGN KEY index = Primary Index
+-- REST ALL index = Secondary Index
 
 
 ANALYZE TABLE customers;
@@ -96,6 +97,7 @@ In that case, we can use
 */
 
 CREATE INDEX idx_lastname ON customers (last_name(20)); -- lastname is VARCHAR
+-- Indexes only apply in the first 20 character and not the whole VARCHAR
 -- Compulsory = TEXT, BLOB
 -- Not-Compulsory = CHAR, VARCHAR
 
@@ -111,6 +113,8 @@ FROM customers;
 By running the above query,we can only see slight difference in 5 and 10 characters
 So 5 is the optimal length to get the maximum distinct records
 */
+
+-- MORE Unique Value == Better INDEX
 
 
 
@@ -135,8 +139,7 @@ But what if we need just `react` or just `redux`
 It won't show it
 */
 
-/*
-Search engines like google does not use  */
+/* Search engines like google does not work this way */
 
 CREATE FULLTEXT INDEX idx_title_body ON posts(title,body);
 
@@ -166,7 +169,7 @@ WHERE MATCH(title,body) AGAINST ('react -redux' IN BOOLEAN MODE); -- Includes: r
 
 /*
     +form = must have the word form
-    "Handling the form" = Exact phrase or word (enclosed in '')
+    "Handling the form" = Exact phrase or word (enclosed in '') => '"Handling the form"'
 */
 
 # (7) COMPOSITE INDEXES (What if we want to sort data using 2 indexes)
@@ -255,6 +258,7 @@ So how can we utilize table index?
 In this situation, you have to utilize your knowledge and rewrite the query in so that it uses indexes
 */
 
+CREATE INDEX idx_points ON customers(points);
 
 EXPLAIN SELECT customer_id FROM customers
 WHERE state='CA'
@@ -263,18 +267,18 @@ SELECT customer_id FROM customers
 WHERE points>1000;
 -- THis way we can utilize the indexes
 
-SELECT customer_id FROM customers
+EXPLAIN SELECT customer_id FROM customers
 WHERE points +10 > 2010;  -- 1010
 
-SELECT customer_id FROM customers
+EXPLAIN SELECT customer_id FROM customers
 WHERE points > 2000;  -- 4 {Isolate your query}
 
 # (10) USING INDEXES FOR SORTING
 EXPLAIN SELECT customer_id FROM customers
-ORDER BY state;  -- index, using index = cheap
+ORDER BY state;  -- type=index, using index = cheap
 
 EXPLAIN SELECT customer_id FROM customers
-ORDER BY first_name;  -- ALL, using filesort(algorithm used my MySQL to sort data) = expensive
+ORDER BY first_name;  -- type=ALL, using filesort(algorithm used my MySQL to sort data) = expensive
 
 
 -- Query Cost
@@ -287,7 +291,7 @@ EXPLAIN SELECT customer_id FROM customers
 ORDER BY state,first_name, points; -- No index, High cost, filesort
 
 EXPLAIN SELECT customer_id FROM customers
-ORDER BY state, points DESC ; -- More
+ORDER BY state, points DESC ; -- Using index; Using filesort
 
 EXPLAIN SELECT customer_id FROM customers
 ORDER BY state DESC,points DESC; -- Low, Backward sort
@@ -297,7 +301,7 @@ ORDER BY state DESC,points DESC; -- Low, Backward sort
 a
 a,b
 a Desc, b Desc
-b with where clause
+b with 'where' clause including a
 */
 
 
@@ -312,7 +316,9 @@ ORDER BY state; -- Expensive because all columns are not added in indexes
 
 /*
 Duplicate index = (A,B,C) (A,B,C)
-Redundant index = (A,B) (A){redundant} (B,A) (B)
+Redundant index = (A,B) (A) = {redundant} (B,A) (B) => When people create index without looking at the existing one.
+
+BEFORE CREATING NEW INDEXES, CHECK THE EXISTING ONES.
 */
 
 

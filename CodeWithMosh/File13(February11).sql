@@ -115,16 +115,14 @@ There are various data types in MySQL
     LONGBLOB = for storing binary data upto 4GB
 
     We should avoid store binary data in the MySQL
-    MySQL is relational DBMS, not the binary database
-}
+    MySQL is relational DBMS, not the binary database.
 
-
-** PROBLEMS WITH STORING FILES IN A DATABASE **
-{
+    PROBLEMS WITH STORING FILES IN A DATABASE:
     1) Increased database size
     2) Slower backups
     3) Performance problems
     4) More code to read/write images
+
 }
 
 
@@ -137,17 +135,19 @@ There are various data types in MySQL
 -- It is used heavily in mobile and desktop applications
 
 -- CREATING A JSON object
+
+select * from products;
 UPDATE products
 SET properties = '
 {
     "dimensions": [1,2,3],
     "weight": 10,
-    "manufacturer": {"name": "song"},
+    "manufacturer": {"name": "song"}
 }' WHERE product_id = 1;
 
 -- Upper code is used to create json object
--- In MySQL, we also have predefine json objects
 
+-- In MySQL, we also have predefine json objects
 UPDATE products
 SET properties = JSON_OBJECT(
     'weight',10,
@@ -161,17 +161,16 @@ WHERE product_id = 1;
 -- (1)
 SELECT
     product_id,
-    JSON_EXTRACT(properties,'$.weight') AS weight
+    JSON_EXTRACT(properties,'$.weight') AS weight  -- $ means Current JSON document
 FROM products
 WHERE product_id = 1;
 
 -- (2)  -> is a column pass operator
 SELECT
     product_id,
-    properties -> '$.dimensions[index]'
-               ->  ['$.manufacturer.name'] with double quotes
-               ->>  ['$.manufacturer.name'] with double quotes
-                   ['$.dimensions[index]']
+    properties -> '$.dimensions[1]'
+--             ->   ['$.manufacturer.name'] with double quotes
+--             ->>  ['$.manufacturer.name'] without double quotes (This is helpful when the expression is in WHERE clause)
 FROM products
 WHERE product_id = 1;
 
